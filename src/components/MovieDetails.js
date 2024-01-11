@@ -41,12 +41,22 @@ const MovieDetails = () => {
   // Render the movie details with an image, title, plot, IMDb rating, and a back button
   return (
     <div className={styles.movieDetails}>
-      <article><img src={movieDetails.Poster} alt={`${movieDetails.Title} Poster`} /></article>
+      <picture>
+        <img src={movieDetails.Poster} alt={`${movieDetails.Title} Poster`} />
+      </picture>
       <main>
-        <h1 className={styles.title}>{movieDetails.Title}</h1>
-        <article>{movieDetails.Plot}</article>
-        <p>Rating: {movieDetails.imdbRating}</p>
-        <button onClick={handleGoBack} aria-label={'Back'} alt={`Click to Go Back`}>←</button>
+        <h1 className={styles.title}>
+          {movieDetails.Title}
+        </h1>
+        <article>
+          {movieDetails.Plot}
+        </article>
+        <p>
+          Rating: {movieDetails.imdbRating}
+        </p>
+        <button onClick={handleGoBack} aria-label={'Back'} alt={`Click to Go Back`}>
+          ←
+        </button>
       </main>
     </div>
   );

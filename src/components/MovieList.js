@@ -9,7 +9,9 @@ const MovieList = ({ movies }) => {
       {movies.map((movie) => (
         <section key={movie.imdbID} className={styles.movieItem}>
           <Link href={`/movie/details/${movie.imdbID}`}>
+            <picture>
               <img src={movie.Poster} alt={movie.Title} className={styles.movieImage} />
+            </picture>
           </Link>
         </section>
       ))}
