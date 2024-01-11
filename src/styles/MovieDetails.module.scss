@@ -1,0 +1,61 @@
+.header {
+  text-align: center;
+  font-family: 'Oswald';
+  font-size: 3vh;
+  letter-spacing: -0.1vh;
+  margin-bottom: 2vh;
+}
+
+.loading {
+  text-align: center;
+  font-family: 'Oswald';
+  font-size: 1vh;
+  letter-spacing: -0.1vh;
+  margin-bottom: 2vh;
+  color: black;
+}
+
+.movieDetails {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 2.8vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3%;
+  width: 60%;
+  height: 70%;
+  color: rgb(190, 190, 190);
+
+  @media screen and (max-width: 1024px) {
+    font-size: 2.5vh;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;  
+  }
+
+  img {
+    max-height: 40vh;
+    border-radius: 8px;
+  }
+  
+  .title {
+    font-family: 'Oswald';
+  }
+
+  button {
+    background-color: rgb(124, 124, 124);
+    padding: 3px 30px;
+    border: 0px;
+    border-radius: 6px;
+    transition: background-color 0.25s;
+
+    &:hover {
+      background-color: rgb(190, 190, 190);
+    }
+  }
+}
+
