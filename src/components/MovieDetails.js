@@ -1,48 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import axios from 'axios';
+import { fetchMovieDetailsById } from '../lib/api';
 import styles from '../styles/MovieDetails.module.scss';
 
-// MovieDetails component for displaying details of a single movie
 const MovieDetails = () => {
   const router = useRouter();
   const { movieId } = router.query;
   const [movieDetails, setMovieDetails] = useState(null);
 
-  // State to hold movie details fetched from an API
   useEffect(() => {
     const fetchMovieDetails = async () => {
-      try {
-        const response = await axios.get(
-          `http://www.omdbapi.com/?apikey=c635991f&i=${movieId}`
-        );
-        setMovieDetails(response.data);
-      } catch (error) {
-        console.error('Error fetching movie details:', error);
+      if (movieId) {
+        const details = await fetchMovieDetailsById(movieId);
+        setMovieDetails(details);
       }
     };
 
-    // Call the fetchMovieDetails function when movieId is available
-    if (movieId) {
-      fetchMovieDetails();
-    }
+    fetchMovieDetails();
   }, [movieId]);
 
-  // If movieDetails is not available, render a loading message
   if (!movieDetails) {
     return <h1 className={styles.loading}>Loading..</h1>;
   }
 
-  // navigate back to the MovieList page
   const handleGoBack = () => {
-    router.push('/'); 
+    router.push('/');
   };
 
-  // Render the movie details with an image, title, plot, IMDb rating, and a back button
   return (
     <div className={styles.movieDetails}>
       <picture>
-        <img src={movieDetails.Poster} alt={`${movieDetails.Title} Poster`} />
+        <img 
+          src={movieDetails.Poster} 
+          alt={`${movieDetails.Title} Poster`} 
+          loading="lazy" 
+        />
       </picture>
       <main>
         <h1 className={styles.title}>

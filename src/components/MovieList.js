@@ -8,7 +8,9 @@ const MovieList = ({ movies }) => {
     <main className={styles.movieList} aria-label={'Movie Poster'}>
       {movies.map((movie) => (
         <section key={movie.imdbID} className={styles.movieItem}>
+          {/* Create a Next.js link to the movie details page */}
           <Link href={`/movie/details/${movie.imdbID}`}>
+            {/* Use a 'picture' element with an 'img' for the movie poster */}
             <picture>
               <img src={movie.Poster} alt={movie.Title} className={styles.movieImage} />
             </picture>

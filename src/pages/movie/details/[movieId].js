@@ -2,7 +2,6 @@ import React from 'react';
 import MovieDetails from '../../../components/MovieDetails';
 import styles from '../../../styles/MovieDetails.module.scss';
 
-
 const MovieDetailsPage = () => {
   return (
     <div>

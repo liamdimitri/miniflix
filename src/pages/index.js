@@ -1,14 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MovieList from '../components/MovieList';
-import styles from '../styles/MovieList.module.scss';
-import { useEffect } from 'react';
+import { fetchMovies } from '../lib/api';
 import { logBrowserInfo } from './browserDetection';
+import styles from '../styles/MovieList.module.scss';
 
 const Home = ({ movies }) => {
-  // Call the function to log browser information once when the component mounts
   useEffect(() => {
     logBrowserInfo();
-  }, []); // Empty dependency array ensures this effect runs only once
+  }, []);
 
   return (
     <div>
@@ -22,21 +21,12 @@ const Home = ({ movies }) => {
   );
 };
 
+// Fetch movies during build time using getStaticProps
 export async function getStaticProps() {
-  // Specify a list of movie titles for a pseudo-random selection
   const movieTitles = ['Interstellar', 'Django Unchained', 'Inglourious Basterds', 'Uncut Gems', 'The Wolf of Wall Street', 'Like Mike', 'Step Brothers', 'Talk To Me', 'Training Day', 'Harry Potter', 'Superbad', 'Parasite'];
 
-  // Sort the array randomly using Math.random()
-  const shuffledTitles = movieTitles.sort(() => Math.random() - 0.5);
-
-  // Fetch movie details for each title
-  const moviePromises = shuffledTitles.map(async (title) => {
-    const response = await fetch(`http://www.omdbapi.com/?apikey=c635991f&t=${encodeURIComponent(title)}`);
-    return response.json();
-  });
-
-  // Wait for all promises to resolve
-  const movies = await Promise.all(moviePromises);
+  // Use the fetchMovies function from api.js
+  const movies = await fetchMovies(movieTitles);
 
   return {
     props: {
